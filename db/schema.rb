@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2020_02_15_112633) do
     t.integer "rating"
     t.integer "time"
     t.integer "difficulty"
+    t.text "description"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
