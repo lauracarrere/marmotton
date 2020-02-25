@@ -13,13 +13,21 @@ User.destroy_all
 
 puts 'Creating users...'
 laura = User.create!(email: "laura@marmotton.com", password: "password", first_name: "Laura", last_name: "Carrere")
+laura_pic = URI.open("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")
+laura.photo.attach(io: laura_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
+laura.save!
 
 puts 'Creating recipes...'
-gateau = Recipe.create!(user: laura, name: "gateau au chocolat",
-  description: "mélanger tous les ingrédients", time: 30, difficulty: 3)
+gateau = Recipe.create!(user: laura, name: "Gâteau au chocolat",
+  description: "Préchauffez votre four à 180°C (thermostat 6).\n
+Dans une casserole, faites fondre le chocolat et le beurre coupé en morceaux à feu très doux.\n
+Dans un saladier, ajoutez le sucre, les oeufs, la farine. Mélangez.\n
+Ajoutez le mélange chocolat/beurre. Mélangez bien.\n
+Beurrez et farinez votre moule puis y versez la pâte à gâteau.\n
+Faites cuire au four environ 20 minutes.\n
+A la sortie du four le gâteau ne paraît pas assez cuit. C'est normal, laissez-le refroidir puis démoulez- le.", time: 40, difficulty: 1)
 
 puts 'attaching photos...'
-puts 'Linking with photos...'
 gateau_pic = URI.open("https://images.unsplash.com/photo-1490126125528-a0c3b2998dcd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80")
 gateau.photo.attach(io: gateau_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
 
