@@ -1,0 +1,56 @@
+<div class="container m-3">
+  <h1><%=@recipe.name %></h1>
+    <p>
+      Temps total : <%= @recipe.time %> minutes - Difficulté : <%= @recipe.difficulty if @recipe.difficulty.present? %>/5
+    </p>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="row">
+        <div class="col-6">
+          <div class="container">
+            <% if @recipe.photo.attached?%>
+               <%= cl_image_tag @recipe.photo.key, width: 300, height: 300, crop: :fill %>
+            <% else %>
+              <%= cl_image_tag "", width: 300, height: 300, crop: :fill %>
+            <%end%>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="container text-justify">
+            <p><%= @recipe.description %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div class="ingredients-card text-justify">
+        <div class="p-3">
+          <h5 class="ingredients-card-title">Ingredients</h5>
+          <p class="font-weight-normal pt-3">
+            <% @recipe.quantities.each do |quantity| %>
+              <div>
+                <%= quantity.ingredient.name %> : <%= quantity.description %>
+              </div>
+            <% end %>
+            <%= simple_form_for ([@recipe, @quantity], remote: true) do |f| %>
+              <div class="form-row p-3 booking-row">
+                <div class="col">
+                  <%= f.association :ingredient %>
+                </div>
+                <div class="col">
+                  <%= f.input :description, type: "text", as: :string %>
+                </div>
+              </div>
+              <%= f.submit "Ajouter l\'ingredient", class: 'btn btn-primary w-50 mb-2' %>
+          <% end %>
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

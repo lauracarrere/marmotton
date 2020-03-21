@@ -5,14 +5,15 @@ before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   end
 
   def show
+    @quantity = Quantity.new
   end
 
   def new
-    @recipe = Recipe.new
+    @recipe = current_user.recipes.new
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_user.recipes.new(recipe_params)
     if @recipe.save
       redirect_to recipe_path(@recipe)
     else
