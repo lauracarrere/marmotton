@@ -11,9 +11,19 @@ class QuantitiesController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { render :'recipes/show' }
+        format.html { render 'recipes/show' }
         format.js
       end
+    end
+  end
+
+  def destroy
+    @quantity = Quantity.find(params[:id])
+    @recipe = @quantity.recipe
+    @quantity.destroy
+    respond_to do |format|
+      format.html { redirect_to recipe_path(@recipe) }
+      format.js # render destroy.js.erb
     end
   end
 
@@ -22,6 +32,4 @@ class QuantitiesController < ApplicationController
   def quantity_params
     params.require(:quantity).permit(:description, :ingredient, :recipe)
   end
-
-
 end

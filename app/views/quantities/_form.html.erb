@@ -1,0 +1,13 @@
+<%= simple_form_for([ recipe, quantity ], remote: true) do |f| %>
+  <div class="form-row p-3 booking-row">
+    <div class="col">
+      <%= f.association :ingredient %>
+    </div>
+    <div class="col">
+      <%= f.input :description, type: "text", as: :string %>
+    </div>
+  <div class="text-center">
+    <%= f.submit "Ajouter l\'ingredient", class: 'btn btn-primary mb-2' %>
+  </div>
+  </div>
+<% end %>

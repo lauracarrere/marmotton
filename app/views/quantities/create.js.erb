@@ -1,1 +1,18 @@
-create.js.erb
+
+function refreshForm(innerHTML) {
+  const newIngredientForm = document.getElementById('new-quantity');
+  newIngredientForm.innerHTML = innerHTML;
+}
+
+function addQuantity(quantityHTML) {
+  const quantitiesContainer = document.getElementById('quantities-container');
+  quantitiesContainer.insertAdjacentHTML('beforeend', quantityHTML);
+}
+
+<% if @quantity.valid? %>
+  addQuantity('<%= j render "quantities/quantity_line", quantity: @quantity %> ');
+  refreshForm( '<%= j render "quantities/form", recipe: @recipe, quantity: Quantity.new %> ');
+<% else %>
+  refreshForm( '<%= j render "quantities/form", recipe: @recipe, quantity: @quantity %> ');
+<% end %>
+

@@ -8,6 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Marmotton
   class Application < Rails::Application
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
     config.generators do |generate|
           generate.assets false
           generate.helper false
@@ -15,9 +17,6 @@ module Marmotton
         end
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
-
-    # added to ajaxify the app
-    config.action_view.embed_authenticity_token_in_remote_forms = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
