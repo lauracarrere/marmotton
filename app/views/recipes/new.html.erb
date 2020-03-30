@@ -1,13 +1,16 @@
 <div class="container justify-content-center w-50">
   <div class="card p-3 m-3">
     <h1 class="mt-3 mb-3 new-recipe-title">Nouvelle recette</h1>
+    <p>
+      Commencez par décrire votre recette... Vous ajouterez la liste des ingrédients à la prochaine page.
+    </p>
       <%= simple_form_for(@recipe) do |f| %>
-        <%= f.input :name %>
+        <%= f.input :name, label: "Nom de la recette" %>
         <%= f.input :description %>
         <%= f.input :time, label: "Temps en minutes" %>
-        <%= f.input :difficulty, collection: 1..5 %>
+        <%= f.input :difficulty, label: "Difficulté", collection: 1..5 %>
         <%= f.input :photo, as: :file %>
-        <%= f.submit 'Créer une nouvelle recette', class: 'btn btn-dark w-100 mb-5 mt-2' %>
+        <%= f.submit 'Créer votre nouvelle recette', class: 'btn btn-dark w-100 mb-5 mt-2' %>
       <% end %>
     </div>
 </div>

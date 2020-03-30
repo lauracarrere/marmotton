@@ -1,3 +1,8 @@
 <li data-quantity-id = "<%= quantity.id %>" >
-  <%= quantity.ingredient.name %> : <%= quantity.description %> - <%= link_to "supprimer", quantity_path(quantity), method: :delete, remote: true  %>
+  <%= quantity.ingredient.name %> : <%= quantity.description %> -
+  <span class="quantity-delete-edit">
+    <%= link_to quantity_path(quantity), method: :delete, remote: true do %>
+      <i class="far fa-trash-alt"></i>
+    <% end %>
+  </span>
 </li>

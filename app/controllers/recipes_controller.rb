@@ -1,11 +1,16 @@
 class RecipesController < ApplicationController
-before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   def index
-    @recipes = Recipe.all
+    if params[:query].present?
+      @recipes = Recipe.all.search_by_multiple(params[:query])
+    else
+      @recipes = Recipe.all.order(name: :asc)
+    end
   end
 
   def show
     @quantity = Quantity.new
+    @ingredient = Ingredient.new
   end
 
   def new
@@ -27,6 +32,10 @@ before_action :set_recipe, only: [:show, :edit, :update, :destroy]
   def update
     @recipe.update(recipe_params)
     redirect_to recipe_path(@recipe)
+  end
+
+  def destroy
+    @recipe.destroy
   end
 
   private

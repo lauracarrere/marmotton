@@ -39,9 +39,35 @@
             </ul>
             <div id= "new-quantity" >
               <%= render 'quantities/form', recipe: @recipe, quantity: @quantity %>
+              <p>Vous ne trouvez pas votre ingrédients dans la liste ?
+                <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#ingredientModal">
+                  Créez-le dans la base
+                </button>
+              </p>
             </div>
           </p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal nouvel ingrédient -->
+<div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog" aria-labelledby="ingredientModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ingredientModalLabel">Créez un nouvel ingrédient</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+        <%= simple_form_for [@recipe, @ingredient] do |f| %>
+          <%= f.input :name, type: "text", label: "Nom de l'ingrédient", class: "form-control", as: :string %>
+          <%= f.submit 'Créer', class: 'btn btn-apply mb-2' %>
+        <% end %>
       </div>
     </div>
   </div>

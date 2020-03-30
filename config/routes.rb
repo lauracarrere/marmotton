@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :recipes, only: [:index, :show, :new, :create, :edit, :update] do
+  resources :recipes do
     resources :quantities, only: [:create]
+    resources :ingredients, only: [:new, :create, :destroy, :edit, :update]
   end
-  resources :ingredients, only: [:create]
   resources :quantities, only: [:destroy]
   get '/dashboard', to: 'pages#dashboard', as: :dashboard
   root to: 'recipes#index'
