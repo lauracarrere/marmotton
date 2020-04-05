@@ -10,6 +10,7 @@ class IngredientsController < ApplicationController
 
   def create
     @ingredient = Ingredient.new(ingredient_params)
+    @ingredient.name.downcase!
     @recipe = Recipe.find(params[:recipe_id])
     @ingredient.save
     redirect_to recipe_path(@recipe)

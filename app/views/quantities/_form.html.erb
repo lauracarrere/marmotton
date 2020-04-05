@@ -1,7 +1,7 @@
 <%= simple_form_for([ recipe, quantity ], remote: true) do |f| %>
-  <div class="form-row p-3 booking-row">
+  <div class="form-row p-3">
     <div class="col">
-      <%= f.association :ingredient %>
+      <%= f.association :ingredient, collection: Ingredient.order(:name.downcase) %>
     </div>
     <div class="col">
       <%= f.input :description, type: "text", as: :string %>

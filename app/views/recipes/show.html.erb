@@ -39,11 +39,18 @@
             </ul>
             <div id= "new-quantity" >
               <%= render 'quantities/form', recipe: @recipe, quantity: @quantity %>
-              <p>Vous ne trouvez pas votre ingrédients dans la liste ?
-                <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#ingredientModal">
-                  Créez-le dans la base
-                </button>
-              </p>
+            </div>
+            <div>
+              Vous ne trouvez pas votre ingrédient dans la liste ?
+              <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#ingredientModal">
+                Créez-le dans la base !
+              </button>
+            </div>
+            <div>
+              Vous vous êtes trompé(e) en créant votre ingrédient ?
+              <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#deleteIngredientModal">
+                Supprimez-le.
+              </button>
             </div>
           </p>
         </div>
@@ -51,6 +58,11 @@
     </div>
   </div>
 </div>
+
+
+
+
+
 
 
 <!-- Modal nouvel ingrédient -->
@@ -65,8 +77,12 @@
       </div>
       <div class="modal-body text-center">
         <%= simple_form_for [@recipe, @ingredient] do |f| %>
-          <%= f.input :name, type: "text", label: "Nom de l'ingrédient", class: "form-control", as: :string %>
-          <%= f.submit 'Créer', class: 'btn btn-apply mb-2' %>
+          <div class="form-group p-3">
+            <%= f.input :name, type: "text", label: "Nom de l'ingrédient", class: "form-control", as: :string %>
+            <div class="text-center">
+              <%= f.submit 'Créer', class: 'btn btn-primary mb-2' %>
+            </div>
+          </div>
         <% end %>
       </div>
     </div>
