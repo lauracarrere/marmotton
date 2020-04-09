@@ -88,3 +88,29 @@
     </div>
   </div>
 </div>
+
+
+<!-- Modal supprimer ingrédient - A FINIR - cf ligne 109 a finir avec exemple du cours -->
+<div class="modal fade" id="deleteIngredientModal" tabindex="-1" role="dialog" aria-labelledby="deleteIngredientModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteIngredientModalLabel">Supprimer un ingrédient de la base</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+
+        <%= simple_form_for [@recipe, @ingredient] do |f| %>
+          <div class="form-group p-3">
+            <%= f.association :ingredient, collection: Ingredient.order(:name.downcase) %>
+            <div class="text-center">
+              <%= f.submit 'Supprimer', class: 'btn btn-primary mb-2' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
