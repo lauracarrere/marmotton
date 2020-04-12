@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
   def show
     @quantity = Quantity.new
     @ingredient = Ingredient.new
+    @ingredients = Ingredient.all
   end
 
   def new

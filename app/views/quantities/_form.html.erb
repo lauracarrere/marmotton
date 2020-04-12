@@ -1,13 +1,13 @@
 <%= simple_form_for([ recipe, quantity ], remote: true) do |f| %>
   <div class="form-row p-3">
     <div class="col">
-      <%= f.association :ingredient, collection: Ingredient.order(:name.downcase) %>
+      <%= f.association :ingredient, label: "ingrédient", collection: Ingredient.all.map{|t| t.name.downcase}.sort %>
     </div>
     <div class="col">
       <%= f.input :description, type: "text", as: :string %>
     </div>
     <div class="text-center">
-      <%= f.submit "Ajouter l\'ingredient", class: 'btn btn-primary mb-2' %>
+      <%= f.submit "Ajouter l\'ingrédient", class: 'btn btn-primary mb-2' %>
     </div>
   </div>
 <% end %>

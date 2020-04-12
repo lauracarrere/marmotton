@@ -17,6 +17,16 @@ laura_pic = URI.open("https://images.unsplash.com/photo-1494790108377-be9c29b293
 laura.photo.attach(io: laura_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
 laura.save!
 
+dany = User.create!(email: "dcthibault@orange.fr", password: "password", first_name: "Dany", last_name: "Thibault")
+dany_pic = URI.open("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")
+dany.photo.attach(io: laura_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
+dany.save!
+
+mo = User.create!(email: "mo.carrere71@gmail.com", password: "password", first_name: "Marie-Odile", last_name: "Carrere")
+mo_pic = URI.open("https://photos.google.com/photo/AF1QipMAGtqIMergxUst1PwQ9gUKa3pIEWr-3TBlYCs")
+mo.photo.attach(io: mo_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
+mo.save!
+
 puts 'Creating recipes...'
 gateau = Recipe.create!(user: laura, name: "Gâteau au chocolat",
   description: "Préchauffez votre four à 180°C (thermostat 6).\n

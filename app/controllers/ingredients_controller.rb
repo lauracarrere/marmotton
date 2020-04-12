@@ -1,12 +1,22 @@
 class IngredientsController < ApplicationController
   before_action :set_ingredient, only: [:edit, :update, :destroy]
+
   # def index
   #   if params[:query].present?
-  #     @ingredients = Ingredient.all.search_by_multiple(params[:query])
+  #     @ingredients = @ingredients.global_search(params[:query])
   #   else
-  #     @ingredients = Ingredient.all.order(name: :asc)
-  #   end
+  #     @ingredients = Ingredients.all
   # end
+
+  def index
+    if params[:name].present?
+      @ingredient = Ingredient.all.find_by(name: params[:name])
+      @ingredient.destroy if @ingredient.quantities.empty?
+    else
+      @ingredients = Ingredient.all.order(name: :asc)
+    end
+    redirect_to recipes_path
+  end
 
   def create
     @ingredient = Ingredient.new(ingredient_params)
@@ -24,9 +34,10 @@ class IngredientsController < ApplicationController
   #   redirect_to ingredient_path(@ingredient)
   # end
 
-  # def destroy
-  #   @ingredient.destroy
-  # end
+  def destroy
+    @ingredient.destroy if @ingredient.quantities.empty?
+    redirect_to recipes_path
+  end
 
   private
 
