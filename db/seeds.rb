@@ -12,20 +12,22 @@ Quantity.destroy_all
 User.destroy_all
 
 puts 'Creating users...'
+# TO DO : AJOUTER LES PHOTOS
 laura = User.create!(email: "laura@marmotton.com", password: "password", first_name: "Laura", last_name: "Carrere")
-laura_pic = URI.open("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")
+laura_pic = URI.open("https://lh3.googleusercontent.com/7IlSPaHM1Cwr-8PM42ylJUAr0IUNlcHM-cCebDGqSIsiMFcBt8ceut_dnD7KbaUcOLzdOiCzUWkuN8SsOjV87ikl_Iq86b0sfVPMpJBhUPBvU4c5vm3WYfySqRXJE227mlL3uetQVpVO-fdHmxnctVn7aIz2XQTXTOMNE4D0x_895kCTsp5lUEbaZTJ_Yqa-6I6J9FmPI9w8u0wt9E7Z8G8MZl3_XYW0KijhPaUcjNMNtWRFoZJovVTjer_taQHf4s-YF-SqIWJAfKAUPimVuyaCLB2OZ4X8r2awbXr7ycPhIlPWb0421ENy1AoCp5Gi4VKEFxyUz96wlexES_rPG3nC3G49rtK4N4MYeYgiy5r9UK-J-yG_TiC8Tm8K1fZufh8-IwL1AXX0JMZZuCYSGILHC7U7VXvOiubNdTO-I6ccr90lgWKwgJd5FVJVsp2coi26qi08i6XUjynVm1o5USRbYXYhHIiLqIrUW9t4in6tPZrmDMzAh1J5FTRXE_e-nN1JZOaV7oJ6EayxeNzLv-FLsGk5mWCFeJ7EbyDa5ouV7_NloTJOpqzlv4TqXTciNvv6U2yTIJnTpU1siXA4xJ_EJG-hwyyWdfSDLvtRPf1L97k6T03SxSWR3PnsqyyZ2MpryQHx34yFrp5iBxyhPN-kmJjTJkMXQWsuhL8bbzKafh8I6X9UQpbjhGmozzoMZ15sbZ7IdliPtdTY5IrVbwgKn8WWMXEZfydX8_MAhq4=w962-h640-no")
 laura.photo.attach(io: laura_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
 laura.save!
 
 dany = User.create!(email: "dcthibault@orange.fr", password: "password", first_name: "Dany", last_name: "Thibault")
-dany_pic = URI.open("https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60")
-dany.photo.attach(io: laura_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
+dany_pic = URI.open("https://lh3.googleusercontent.com/i8E8KVJLPZR1PNdtsxIF_GMtJWH_ljEV8cHLqdIHshQ6ljsLHdb79WoJ6wywMGnQzahyp18bJ6GahUdrVcd0cIYeda78GG_vph6jVxR3jrT9HuCrHIX20y8Os-gpfZtbmB5V2pwtAymD4eK-_Dx6zCuhV3Od0bWP_s3dZmQzX5WkEHoqp5jRHBoSVkZrLDPxOXIPQHbjbLi4PfDJOaNE-tNhVfbCX0Gg2QeDjxaURiJBGsDZSCTz6MYy1JGJJV4Bz8yt4Kc4PrxqvuZcg08WIRQlhQ4tWs_Mp82xv5ybtAmvxb6jdEM2MLY-vlp9w6QvorJRJCIDzSOgEdDlmbzYUfcDdYxKPrOMSZzHgJRxn5zhhu3Xw_xs8QO2nRFRqGBSyDj0UyapBZ7CQZJZOcAHYC07qYSyG4_0Nt3T1GxhpK1wqLajtAcHAnFY-qrNNVk579XjJZ0cA5gInM1pDCWYsnQULj950D6_n7iHBwnQqcawYt0ksJAdqaAMDOjgbLR8e3XMAsekv49qzhUHhZL0UYYO9yNMLLz-ApFnmNtBi0rO7L_IwYwMNTdbO1vI2gDWb3DSMbewUeI1ZhvMZcZ5vicz8qtZGOxL2yr8KI1Ah9V-PZKEvjQo6ESkvDkwCGi3OS5hWWx8NW7Xc67LB0ZtELpv0YGHiLbEFhg-fFIlxGSs31v0GBmMYxg=w250-h374-no")
+dany.photo.attach(io: dany_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
 dany.save!
 
 mo = User.create!(email: "mo.carrere71@gmail.com", password: "password", first_name: "Marie-Odile", last_name: "Carrere")
-mo_pic = URI.open("https://photos.google.com/photo/AF1QipMAGtqIMergxUst1PwQ9gUKa3pIEWr-3TBlYCs")
+mo_pic = URI.open("https://lh3.googleusercontent.com/KO7YCKjFV7BokKT49IttY99MIipZxRtrd-OVZjS7aUcc_CDx8XfwYpXM6E7zjj7H8DRdWqTuFeh9R26Yd-F7MaUa101WGcp6hTWRKXeb-5oF1zcoC9hTHApDHvBlsWXoPr-MTCqstCVnruCc76ttjk2HUEdM6bD9PN-ZqVt3TOAgUKw5RREmZd-4njJNXKDln_FsIyQWaykgmzYDfYY5N5_i4T6yRfFjKvUwa3_zpAruaye5xWzRY2XCOF5fxPCxvunNnFC5cZoikOZjLoTG7jKYRTfVnLieOAiK7IB0Q0_Gh35vatKiBXkKw7VFi2ze4OxS8Zym38Bwy_t5TQotdH-a54sflLskdX1aqHfPR8h0jt2eK1I0C8ZKYtHLrU8s4vJVS_ta3R5eNaY29E2fm8RpIL_FBYbNqs-QnOlYW4gxgR8iQIwl_kzozqtQSPzPjeHT_W2_P5VbRCfXHzf1wbFeoFwwUsco9-jzr3VzJ-J9wGZBfj_8Vvkjvq7NTziQi-xHooViCMwOoSA8AZjMbzMjiM6smptVQcSKOWiyomFayOqYVvLZqFtPk8lRoWXZZWQn1KpjGcMs6cZ2Ul799WAc7ftyxtB1yCDLyonwYD-ojFww08eC8mPRZweFIk780tFjfxASTtn4nLlxjveljrXABs9rmNOCC20E5R8sIo623JHBUd9ymkE=w460-h689-no")
 mo.photo.attach(io: mo_pic, filename: 'some-image.jpg', content_type: 'image/jpg')
 mo.save!
+
 
 puts 'Creating recipes...'
 gateau = Recipe.create!(user: laura, name: "Gâteau au chocolat",
