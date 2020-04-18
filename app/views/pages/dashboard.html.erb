@@ -23,7 +23,11 @@
         <div class="d-flex flex-column align-items-center mt-2">
           <div class="card mt-3" style="width: 40rem;">
             <div class="card-body">
-              <center><%= cl_image_tag current_user.photo.key, height: 120, width: 120, crop: :fill, radius: 40%></center>
+              <% if current_user.photo.attached?%>
+                 <center><%= cl_image_tag current_user.photo.key, height: 120, width: 120, crop: :fill, radius: 40%></center>
+              <% else %>
+                <%= cl_image_tag "", width: 300, height: 300, crop: :fill %>
+              <%end%>
               <br>
               <p><strong>First Name: </strong><%= current_user.first_name %></p>
               <p><strong>Last Name: </strong><%= current_user.last_name %></p>

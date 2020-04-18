@@ -22,11 +22,6 @@
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
         </li>
-        <li>
-          <div class="avatar">
-            <div style="background-image: url(<%= cl_image_path current_user.photo.key %>);" class="avatar-mine"></div>
-          </div>
-        </li>
       <% else %>
         <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "nav-link" %>

@@ -1,8 +1,10 @@
 <div class="container m-3">
   <h1><%=@recipe.name %>
     <span>
-      <%= link_to edit_recipe_path(@recipe) do %>
-        <i class="fas fa-pen edit-icon ml-2"></i>
+      <% if @recipe.user == current_user %>
+        <%= link_to edit_recipe_path(@recipe) do %>
+          <i class="fas fa-pen edit-icon ml-2"></i>
+        <% end %>
       <% end %>
     </span>
   </h1>
@@ -28,12 +30,14 @@
           <div class="container text-justify">
             <h5 class="ingredients-card-title pt-3">Description
               <span>
-                <%= link_to edit_recipe_path(@recipe) do %>
-                  <i class="fas fa-pen edit-icon ml-2"></i>
+                <% if @recipe.user == current_user %>
+                  <%= link_to edit_recipe_path(@recipe) do %>
+                    <i class="fas fa-pen edit-icon ml-2"></i>
+                  <% end %>
                 <% end %>
               </span>
             </h5>
-            <p><%= @recipe.description %></p>
+            <p class="pt-1"><%= @recipe.description %></p>
           </div>
         </div>
       </div>
