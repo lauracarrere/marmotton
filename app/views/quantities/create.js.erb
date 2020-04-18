@@ -10,6 +10,7 @@ function addQuantity(quantityHTML) {
 }
 
 <% if @quantity.valid? %>
+  console.log("dans create.js.erb")
   addQuantity('<%= j render "quantities/quantity_line", quantity: @quantity %> ');
   refreshForm( '<%= j render "quantities/form", recipe: @recipe, quantity: Quantity.new %> ');
 <% else %>

@@ -1,5 +1,11 @@
 <div class="container m-3">
-  <h1><%=@recipe.name %></h1>
+  <h1><%=@recipe.name %>
+    <span>
+      <%= link_to edit_recipe_path(@recipe) do %>
+        <i class="fas fa-pen edit-icon ml-2"></i>
+      <% end %>
+    </span>
+  </h1>
     <p>
       Temps total : <%= @recipe.time %> minutes - Difficulté : <%= @recipe.difficulty if @recipe.difficulty.present? %>/5
     </p>
@@ -20,6 +26,13 @@
         </div>
         <div class="col-6">
           <div class="container text-justify">
+            <h5 class="ingredients-card-title pt-3">Description
+              <span>
+                <%= link_to edit_recipe_path(@recipe) do %>
+                  <i class="fas fa-pen edit-icon ml-2"></i>
+                <% end %>
+              </span>
+            </h5>
             <p><%= @recipe.description %></p>
           </div>
         </div>
@@ -31,7 +44,7 @@
       <div class="ingredients-card text-justify">
         <div class="p-3">
           <h5 class="ingredients-card-title">Ingrédients</h5>
-          <p class="font-weight-normal pt-3">
+          <p class="font-weight-normal pt-1">
             <ul id = "quantities-container">
               <% @recipe.quantities.each do |quantity| %>
                 <%= render 'quantities/quantity_line', quantity: quantity %>
@@ -85,7 +98,7 @@
 </div>
 
 
-<!-- Modal supprimer ingrédient - A FINIR - cf ligne 109 a finir avec exemple du cours -->
+<!-- Modal supprimer ingrédient -->
 <div class="modal fade" id="deleteIngredientModal" tabindex="-1" role="dialog" aria-labelledby="deleteIngredientModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content text-center">

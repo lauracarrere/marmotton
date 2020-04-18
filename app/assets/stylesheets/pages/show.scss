@@ -1,4 +1,12 @@
 
+.edit-icon {
+  font-size:50%;
+ }
+
+.edit-icon:hover {
+  font-size:55%;
+  }
+
 .ingredients-card {
   position: sticky;
   top: 100px;
@@ -14,3 +22,4 @@
   font-family: 'Pacifico', cursive;
   color: $deep-brown;
 }
+

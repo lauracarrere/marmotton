@@ -3,7 +3,10 @@ class QuantitiesController < ApplicationController
     @recipe = Recipe.find(params[:recipe_id])
     @quantity = @recipe.quantities.new(quantity_params)
     @quantity.recipe = @recipe
-    @quantity.ingredient = Ingredient.find(params[:quantity][:ingredient_id])
+    puts "recette : #{@recipe}"
+    puts "params[:quantity] : #{params[:quantity]}"
+    @quantity.ingredient = Ingredient.find_by(name: params[:quantity][:ingredient_id])
+
     if @quantity.save
       respond_to do |format|
         format.html { redirect_to recipe_path(@recipe) }

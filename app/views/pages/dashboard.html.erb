@@ -57,8 +57,8 @@
                   </div>
                 <% end %>
                 <div class="card-tools">
-                  <%= link_to 'Edit', edit_recipe_path(recipe), class: "btn btn-light card-delete" %>
-                  <%=link_to "Delete", recipe_path(recipe), class: "btn btn-light card-delete", method: :delete, data: {confirm: "Souhaitez-vous vraiment supprimer la recette #{recipe.name} ?"}, remote: true %>
+                  <%= link_to 'Modifier', edit_recipe_path(recipe), class: "btn btn-light card-delete" %>
+                  <%=link_to "Supprimer", recipe_path(recipe), class: "btn btn-light card-delete", method: :delete, data: {confirm: "Souhaitez-vous vraiment supprimer la recette #{recipe.name} ?"}, remote: true %>
                 </div>
               </div>
             <% end %>

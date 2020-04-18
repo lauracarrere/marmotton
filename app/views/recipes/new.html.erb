@@ -4,13 +4,13 @@
     <p>
       Commencez par décrire votre recette... Vous ajouterez la liste des ingrédients à la prochaine page.
     </p>
-      <%= simple_form_for(@recipe) do |f| %>
-        <%= f.input :name, label: "Nom de la recette" %>
-        <%= f.input :description, type: "text", label: "Description de la recette", class: "form-control form-control-lg", as: :text  %>
-        <%= f.input :time, label: "Temps en minutes" %>
-        <%= f.input :difficulty, label: "Difficulté", collection: 1..5 %>
-        <%= f.input :photo, as: :file %>
-        <%= f.submit 'Créer votre nouvelle recette', class: 'btn btn-dark w-100 mb-5 mt-2' %>
-      <% end %>
+    <%= simple_form_for(@recipe) do |f| %>
+      <%= f.input :name, label: "Nom de la recette" %>
+      <%= f.input :time, label: "Temps en minutes" %>
+      <%= f.input :description, label: "Description complète de la recette" %>
+      <%= f.input :difficulty, label: "Difficulté", collection: 1..5 %>
+      <%= f.input :photo, as: :file %>
+      <%= f.submit 'Créer votre nouvelle recette', class: 'btn btn-dark w-100 mb-5 mt-2' %>
+    <% end %>
     </div>
 </div>
