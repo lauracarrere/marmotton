@@ -1,6 +1,7 @@
 <div class="container m-3">
   <h1><%=@recipe.name %>
     <span>
+
       <% if @recipe.user == current_user %>
         <%= link_to edit_recipe_path(@recipe) do %>
           <i class="fas fa-pen edit-icon ml-2"></i>
@@ -8,6 +9,16 @@
       <% end %>
     </span>
   </h1>
+    <p>
+      Postée par
+      <% if @recipe.user.photo.attached?%>
+        <%= cl_image_tag @recipe.user.photo.key, width: 30, height: 30, crop: :thumb, radius: :max, gravity: :face %>
+  <% else %>
+    <strong><%= @recipe.user.first_name %></strong>
+  <%end%>
+  </p>
+
+
     <p>
       Temps total : <%= @recipe.time %> minutes - Difficulté : <%= @recipe.difficulty if @recipe.difficulty.present? %>/5
     </p>
