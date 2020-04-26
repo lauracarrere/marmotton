@@ -29,7 +29,7 @@
 .card-recipe h2 {
   font-size: 16px;
   font-weight: bold;
-  margin: 0;
+  margin-bottom: 7px;
 }
 
 .card-recipe p {
@@ -38,18 +38,18 @@
   margin: 0;
 }
 
+.card-recipe-user {
+  position: absolute;
+  right: 10px;
+  top: 7px;
+}
 
-.card-recipe .card-recipe-infos {
-  padding: 16px;
+.card-recipe-infos {
+  padding: 12px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
 }
 
-.card-recipe-infos .card-recipe-user {
-  position: absolute;
-  right: 16px;
-  top: -20px;
-  width: 40px;
-}
+

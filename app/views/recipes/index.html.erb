@@ -19,7 +19,16 @@
               <h2><%= recipe.name %></h2>
               <p>Temps : <%= recipe.time %> minutes</p>
             </div>
-            <p> Difficulté : <%= recipe.difficulty if recipe.difficulty.present? %>/5</p>
+            <div class="text-right">
+              <div class="card-recipe-user">
+                <% if recipe.user.photo.attached?%>
+                  <%= cl_image_tag recipe.user.photo.key, width: 25, height: 25, crop: :thumb, radius: :max, gravity: :face %>
+                <% else %>
+                  <%= recipe.user.first_name %>
+                <%end%>
+              </div>
+              <p> Difficulté : <%= recipe.difficulty if recipe.difficulty.present? %>/5</p>
+            </div>
           </div>
         </div>
       <% end %>

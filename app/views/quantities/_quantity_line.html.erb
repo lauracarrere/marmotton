@@ -1,8 +1,10 @@
 <li data-quantity-id = "<%= quantity.id %>" >
-  <%= quantity.ingredient.name %> : <%= quantity.description %> -
+  <%= quantity.ingredient.name %> : <%= quantity.description %>
   <span class="quantity-delete-edit">
-    <%= link_to quantity_path(quantity), method: :delete, remote: true do %>
-      <i class="far fa-trash-alt"></i>
+    <% if @recipe.user == current_user %>
+      <%= link_to quantity_path(quantity), method: :delete, remote: true do %>
+        <i class="far fa-trash-alt"></i>
+      <% end %>
     <% end %>
   </span>
 </li>
