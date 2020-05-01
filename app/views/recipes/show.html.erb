@@ -26,19 +26,19 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-9">
+    <div class="col-8">
       <div class="row">
         <div class="col-4">
-          <div class="container">
+          <div class="container mt-5">
             <% if @recipe.photo.attached?%>
-               <%= cl_image_tag @recipe.photo.key, width: 250, height: 250, crop: :fill %>
+               <%= cl_image_tag @recipe.photo.key, width: 200, height: 200, crop: :fill %>
             <% else %>
               <%= cl_image_tag "", width: 250, height: 250, crop: :fill %>
             <%end%>
           </div>
         </div>
         <div class="col-8">
-          <div class="container text-justify pl-4">
+          <div class="container text-justify pl-3">
             <h5 class="ingredients-card-title pt-1">Description
               <span>
                 <% if @recipe.user == current_user %>
@@ -55,7 +55,7 @@
     </div>
 
 <!-- Liste d'ingredients -->
-    <div class="col-3">
+    <div class="col-4">
       <div class="ingredients-card text-justify">
         <div class="pt-1 pb-2 pl-1">
           <h5 class="ingredients-card-title">Ingrédients</h5>
