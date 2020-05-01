@@ -1,9 +1,11 @@
+
+
 .banner {
   background-size: cover;
   background-position: center;
-  padding-bottom: 100px;
+  padding-bottom: 10px;
   background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), asset-url('banner.jpg');
-  height: calc(100vh - 460px);
+  height: calc(10vh);
 }
 
 .banner h1 {
@@ -21,4 +23,12 @@
   color: white;
   opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+#banner-index {
+  background-size: cover;
+  background-position: center;
+  padding-bottom: 100px;
+  background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), asset-url('banner.jpg');
+  height: calc(100vh - 460px);
 }

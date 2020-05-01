@@ -22,8 +22,11 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.new(ingredient_params)
     @ingredient.name.downcase!
     @recipe = Recipe.find(params[:recipe_id])
-    @ingredient.save
-    redirect_to recipe_path(@recipe)
+    if @ingredient.save
+      redirect_to recipe_path(@recipe)
+    else
+      render 'recipes/show'
+    end
   end
 
   # def edit

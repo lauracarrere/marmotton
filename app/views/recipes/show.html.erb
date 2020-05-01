@@ -1,143 +1,173 @@
-<div class="container m-3">
-  <h1><%=@recipe.name %>
-    <span>
-
-      <% if @recipe.user == current_user %>
-        <%= link_to edit_recipe_path(@recipe) do %>
-          <i class="fas fa-pen edit-icon ml-2"></i>
+<div class="container mt-4"
+  <div class="container m-3">
+    <h1><%=@recipe.name %>
+    </%>
+      <span>
+        <% if @recipe.user == current_user %>
+          <%= link_to edit_recipe_path(@recipe) do %>
+            <i class="fas fa-pen edit-icon ml-2"></i>
+          <% end %>
+          <%=link_to recipe_path(@recipe), method: :delete, data: {confirm: "Souhaitez-vous vraiment supprimer la recette #{@recipe.name} ?"} do %>
+            <i class="far fa-trash-alt ml-2 small"></i>
+          <% end %>
         <% end %>
-      <% end %>
-    </span>
-  </h1>
-    <p>
-      Postée par
-      <% if @recipe.user.photo.attached?%>
-        <%= cl_image_tag @recipe.user.photo.key, width: 30, height: 30, crop: :thumb, radius: :max, gravity: :face %>
-      <% else %>
-        <strong><%= @recipe.user.first_name %></strong>
-      <%end%>
-  </p>
+      </span>
+    </h1>
+      <p>
+        Postée par
+        <% if @recipe.user.photo.attached?%>
+          <%= cl_image_tag @recipe.user.photo.key, width: 30, height: 30, crop: :thumb, radius: :max, gravity: :face %>
+        <% else %>
+          <strong><%= @recipe.user.first_name %></strong>
+        <%end%>
+      </p>
 
 
-    <p>
-      Temps total : <%= @recipe.time %> minutes - Difficulté : <%= @recipe.difficulty if @recipe.difficulty.present? %>/5
-    </p>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="col-8">
-      <div class="row">
-        <div class="col-4">
-          <div class="container mt-5">
-            <% if @recipe.photo.attached?%>
-               <%= cl_image_tag @recipe.photo.key, width: 200, height: 200, crop: :fill %>
-            <% else %>
-              <%= cl_image_tag "", width: 250, height: 250, crop: :fill %>
-            <%end%>
-          </div>
-        </div>
-        <div class="col-8">
-          <div class="container text-justify pl-3">
-            <h5 class="ingredients-card-title pt-1">Description
-              <span>
-                <% if @recipe.user == current_user %>
-                  <%= link_to edit_recipe_path(@recipe) do %>
-                    <i class="fas fa-pen edit-icon ml-2"></i>
-                  <% end %>
-                <% end %>
-              </span>
-            </h5>
-            <p class="pt-1"><%= @recipe.description %></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<!-- Liste d'ingredients -->
-    <div class="col-4">
-      <div class="ingredients-card text-justify">
-        <div class="pt-1 pb-2 pl-1">
-          <h5 class="ingredients-card-title">Ingrédients</h5>
-          <p class="font-weight-normal pt-1">
-            <ul id = "quantities-container">
-              <% @recipe.quantities.each do |quantity| %>
-                <%= render 'quantities/quantity_line', quantity: quantity %>
-              <% end %>
-            </ul>
-
-            <!-- form d'ajout d'ingredients -->
-            <% if @recipe.user == current_user %>
-              <div id= "new-quantity" >
-                <%= render 'quantities/form', recipe: @recipe, quantity: @quantity %>
-              </div>
-              <div>
-                Vous ne trouvez pas votre ingrédient dans la liste ?
-                <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#ingredientModal">
-                  Créez-le dans la base !
-                </button>
-              </div>
-              <div>
-                Vous vous êtes trompé(e) en créant votre ingrédient ?
-                <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#deleteIngredientModal">
-                  Supprimez-le.
-                </button>
-              </div>
-            <% end %>
-
-          </p>
-        </div>
-      </div>
-    </div>
+      <p>
+        Temps total : <%= @recipe.time %> minutes - Difficulté : <%= @recipe.difficulty if @recipe.difficulty.present? %>/5
+      </p>
   </div>
-</div>
 
-
-<!-- Modal nouvel ingrédient -->
-<div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog" aria-labelledby="ingredientModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content text-center">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ingredientModalLabel">Créez un nouvel ingrédient</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body text-center">
-        <%= simple_form_for [@recipe, @ingredient] do |f| %>
-          <div class="form-group p-3">
-            <%= f.input :name, type: "text", label: "Nom de l'ingrédient", class: "form-control", as: :string %>
-            <div class="text-center">
-              <%= f.submit 'Créer', class: 'btn btn-primary mb-2' %>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="row">
+          <div class="col-4">
+            <div class="container mt-5">
+              <% if @recipe.photo.attached?%>
+                 <%= cl_image_tag @recipe.photo.key, width: 200, height: 200, crop: :fill %>
+              <% else %>
+                <%= cl_image_tag "", width: 250, height: 250, crop: :fill %>
+              <%end%>
             </div>
           </div>
-        <% end %>
+          <div class="col-8">
+            <div class="container text-justify pl-3">
+              <h5 class="ingredients-card-title pt-1">Description
+                <span>
+                  <% if @recipe.user == current_user && @recipe.description.nil? %>
+                    <button type="button" class="btn btn-light card-description" data-toggle="modal" data-target="#descriptionModal">
+                      <i class="fas fa-pen edit-icon ml-2"></i>
+                    </button>
+                  <% end %>
+                </span>
+              </h5>
+              <p class="pt-1"><%= @recipe.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <!-- Modal description -->
+  <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="descriptionModalLabel">Complétez la description</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center h-100">
+          <%= simple_form_for(@recipe) do |f| %>
+            <div class="p-3">
+              <%= f.input :description, type: "text", class: 'description-field', label: "Description (allongez le champ si besoin en tirant sur l'angle en bas à droite)" %>
+              <div class="text-center">
+                <%= f.submit 'Sauvez la description', class: 'btn btn-dark mb-2' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
-<!-- Modal supprimer ingrédient -->
-<div class="modal fade" id="deleteIngredientModal" tabindex="-1" role="dialog" aria-labelledby="deleteIngredientModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content text-center">
-      <div class="modal-header">
-        <h5 class="modal-title" id="deleteIngredientModalLabel">Supprimer un ingrédient de la base</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <!-- Liste d'ingredients -->
+      <div class="col-4">
+        <div class="ingredients-card text-justify">
+          <div class="pt-1 pb-2 pl-1">
+            <h5 class="ingredients-card-title">Ingrédients</h5>
+            <p class="font-weight-normal pt-1">
+              <ul id = "quantities-container">
+                <% @recipe.quantities.each do |quantity| %>
+                  <%= render 'quantities/quantity_line', quantity: quantity %>
+                <% end %>
+              </ul>
+
+              <!-- form d'ajout de quantity -->
+              <% if @recipe.user == current_user %>
+                <div id= "new-quantity" >
+                  <%= render 'quantities/form', recipe: @recipe, quantity: @quantity %>
+                </div>
+                <div>
+                  Vous ne trouvez pas votre ingrédient dans la liste ?
+                  <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#ingredientModal">
+                    Créez-le dans la base !
+                  </button>
+                </div>
+                <div>
+                  Vous vous êtes trompé(e) en créant votre ingrédient ?
+                  <button type="button" class="btn btn-light card-ingredient" data-toggle="modal" data-target="#deleteIngredientModal">
+                    Supprimez-le.
+                  </button>
+                </div>
+              <% end %>
+
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="modal-body text-center">
-        <%= form_tag( ingredients_path, {method: :get, class: 'form-inline'}) do %>
-          <%= select_tag(
-            :name,
-            options_for_select(Ingredient.all.map{|t| t.name.downcase}.sort, :name),
-            prompt: "Ingredient",
-            class: "form-control mr-1 w-70vw"
-          ) %>
-          <%= submit_tag "Supprimer", class: "btn btn-dark ml-1" %>
-        <% end %>
+    </div>
+  </div>
+
+
+  <!-- Modal nouvel ingrédient -->
+  <div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog" aria-labelledby="ingredientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ingredientModalLabel">Créez un nouvel ingrédient</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <%= simple_form_for [@recipe, @ingredient] do |f| %>
+            <div class="form-group p-3">
+              <%= f.input :name, type: "text", label: "Nom de l'ingrédient", class: "form-control", as: :string %>
+              <div class="text-center">
+                <%= f.submit 'Créer', class: 'btn btn-primary mb-2' %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal supprimer ingrédient -->
+  <div class="modal fade" id="deleteIngredientModal" tabindex="-1" role="dialog" aria-labelledby="deleteIngredientModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteIngredientModalLabel">Supprimer un ingrédient de la base</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+          <%= form_tag( ingredients_path, {method: :get, class: 'form-inline'}) do %>
+            <%= select_tag(
+              :name,
+              options_for_select(Ingredient.all.map{|t| t.name.downcase}.sort, :name),
+              prompt: "Ingredient",
+              class: "form-control mr-1 w-70vw"
+            ) %>
+            <%= submit_tag "Supprimer", class: "btn btn-dark ml-1" %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

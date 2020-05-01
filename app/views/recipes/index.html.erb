@@ -1,37 +1,46 @@
-<div class="d-flex">
-<%= form_tag( recipes_path, {method: :get, class: 'form-inline'}) do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control mr-2 w-70vw",
-    placeholder: "Trouver une recette"
-  %>
-  <%= submit_tag "Rechercher", class: "btn btn-dark" %>
-<% end %>
+<div class="banner" id="banner-index">
+  <%= render 'shared/navbar' %>
+  <div class="container">
+    <h1><span id="banner-typed-text"></span></h1>
+  </div>
 </div>
-<div class="cards mt-4">
-  <% @recipes.each do |recipe| %>
-    <div class="card-wrapper-index">
-      <%= link_to recipe_path(recipe) do %>
-        <div class="card-recipe">
-          <%= cl_image_tag recipe.photo.key if recipe.photo.attached? %>
-          <div class="card-recipe-infos">
-            <div>
-              <h2><%= recipe.name %></h2>
-              <p>Temps : <%= recipe.time %> minutes</p>
-            </div>
-            <div class="text-right">
-              <div class="card-recipe-user">
-                <% if recipe.user.photo.attached?%>
-                  <%= cl_image_tag recipe.user.photo.key, width: 25, height: 25, crop: :thumb, radius: :max, gravity: :face %>
-                <% else %>
-                  <%= recipe.user.first_name %>
-                <%end%>
+
+<div class="container mt-5">
+  <div class="d-flex">
+  <%= form_tag( recipes_path, {method: :get, class: 'form-inline'}) do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control mr-2 w-70vw",
+      placeholder: "Trouver une recette"
+    %>
+    <%= submit_tag "Rechercher", class: "btn btn-dark" %>
+  <% end %>
+  </div>
+  <div class="cards mt-4">
+    <% @recipes.each do |recipe| %>
+      <div class="card-wrapper-index">
+        <%= link_to recipe_path(recipe) do %>
+          <div class="card-recipe">
+            <%= cl_image_tag recipe.photo.key if recipe.photo.attached? %>
+            <div class="card-recipe-infos">
+              <div>
+                <h2><%= recipe.name %></h2>
+                <p>Temps : <%= recipe.time %> minutes</p>
               </div>
-              <p> Difficulté : <%= recipe.difficulty if recipe.difficulty.present? %>/5</p>
+              <div class="text-right">
+                <div class="card-recipe-user">
+                  <% if recipe.user.photo.attached?%>
+                    <%= cl_image_tag recipe.user.photo.key, width: 25, height: 25, crop: :thumb, radius: :max, gravity: :face %>
+                  <% else %>
+                    <%= recipe.user.first_name %>
+                  <%end%>
+                </div>
+                <p> Difficulté : <%= recipe.difficulty if recipe.difficulty.present? %>/5</p>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

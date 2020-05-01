@@ -1,90 +1,94 @@
-<div class="d-flex">
 
-  <!-- Menu de gauche -->
-  <div class="col-2 border border-secondary border-bottom-0 border-left-0 border-top-0">
-    <div class="sticky-menu">
-      <ul class="nav flex-column nav-pills mb-3" id="pills-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="portfolio-tab" data-toggle="pill" href="#portfolio" role="tab" aria-controls="portfolio" aria-selected="false">Mes recettes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="info-tab" data-toggle="pill" href="#info" role="tab" aria-controls="info" aria-selected="true">Mon profil</a>
-        </li>
-      </ul>
+<div class="container mt-5">
+  <div class="d-flex">
+
+    <!-- Menu de gauche -->
+    <div class="col-2 border border-secondary border-bottom-0 border-left-0 border-top-0">
+      <div class="sticky-menu">
+        <ul class="nav flex-column nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="portfolio-tab" data-toggle="pill" href="#portfolio" role="tab" aria-controls="portfolio" aria-selected="false">Mes recettes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="info-tab" data-toggle="pill" href="#info" role="tab" aria-controls="info" aria-selected="true">Mon profil</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <!-- Contenu de droite -->
-  <div class="col-10">
-    <div class="tab-content" id="pills-tabContent">
+    <!-- Contenu de droite -->
+    <div class="col-10">
+      <div class="tab-content" id="pills-tabContent">
 
-      <!-- Tab d'infos de profil -->
-      <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
-        <div class="d-flex flex-column align-items-center mt-2">
-          <div class="card mt-3" style="width: 40rem;">
-            <div class="card-body">
-              <% if current_user.photo.attached?%>
-                 <center><%= cl_image_tag current_user.photo.key, height: 120, width: 120, crop: :fill, radius: 40%></center>
-              <% else %>
-                <%= cl_image_tag "", width: 300, height: 300, crop: :fill %>
-              <%end%>
-              <br>
-              <p><strong>First Name: </strong><%= current_user.first_name %></p>
-              <p><strong>Last Name: </strong><%= current_user.last_name %></p>
-              <p><strong>Email: </strong><%= current_user.email %></p>
-              <p><strong>Password: </strong> •••••••••</p>
+        <!-- Tab d'infos de profil -->
+        <div class="tab-pane fade" id="info" role="tabpanel" aria-labelledby="info-tab">
+          <div class="d-flex flex-column align-items-center mt-2">
+            <div class="card mt-3" style="width: 40rem;">
+              <div class="card-body">
+                <% if current_user.photo.attached?%>
+                   <center><%= cl_image_tag current_user.photo.key, height: 120, width: 120, crop: :fill, radius: 40%></center>
+                <% else %>
+                  <%= cl_image_tag "", width: 300, height: 300, crop: :fill %>
+                <%end%>
+                <br>
+                <p><strong>First Name: </strong><%= current_user.first_name %></p>
+                <p><strong>Last Name: </strong><%= current_user.last_name %></p>
+                <p><strong>Email: </strong><%= current_user.email %></p>
+                <p><strong>Password: </strong> •••••••••</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Tab de dashboard de recettes -->
-      <div class="tab-pane fade show active" id="portfolio" role="tabpanel" aria-labelledby="portfolio-tab">
-        <div class=" p-4">
+        <!-- Tab de dashboard de recettes -->
+        <div class="tab-pane fade show active" id="portfolio" role="tabpanel" aria-labelledby="portfolio-tab">
+          <div class=" p-4">
 
-        <!-- Portfefeuille de recette -->
-        <h3>Mes recettes</h3>
-        <div class="border border-dark p-4 w-100 border-bottom-0 border-left-0 border-right-0" id="portfolio">
-          <br>
-          <div class="cards-small">
-            <% current_user.recipes.each do |recipe| %>
-              <div class="card-wrapper" data-recipe-id="<%= recipe.id %>">
-                <%= link_to recipe_path(recipe) do %>
-                  <div class="card-trip card-small">
-                    <%= cl_image_tag recipe.photo.key if recipe.photo.attached? %>
-                    <div class="card-trip-infos">
-                      <div>
-                        <h2><%= recipe.name %></h2>
+          <!-- Portfefeuille de recette -->
+          <h3>Mes recettes</h3>
+          <div class="border border-dark p-4 w-100 border-bottom-0 border-left-0 border-right-0" id="portfolio">
+            <br>
+            <div class="cards-small">
+              <% current_user.recipes.each do |recipe| %>
+                <div class="card-wrapper" data-recipe-id="<%= recipe.id %>">
+                  <%= link_to recipe_path(recipe) do %>
+                    <div class="card-trip card-small">
+                      <%= cl_image_tag recipe.photo.key if recipe.photo.attached? %>
+                      <div class="card-trip-infos">
+                        <div>
+                          <h2><%= recipe.name %></h2>
+                        </div>
+                        <p><%= recipe.time %> min</p>
                       </div>
-                      <p><%= recipe.time %> min</p>
                     </div>
+                  <% end %>
+                  <div class="card-tools">
+                    <%= link_to 'Modifier', edit_recipe_path(recipe), class: "btn btn-light card-delete" %>
+                    <%=link_to "Supprimer", recipe_path(recipe), class: "btn btn-light card-delete", method: :delete, data: {confirm: "Souhaitez-vous vraiment supprimer la recette #{recipe.name} ?"}, remote: true %>
                   </div>
-                <% end %>
-                <div class="card-tools">
-                  <%= link_to 'Modifier', edit_recipe_path(recipe), class: "btn btn-light card-delete" %>
-                  <%=link_to "Supprimer", recipe_path(recipe), class: "btn btn-light card-delete", method: :delete, data: {confirm: "Souhaitez-vous vraiment supprimer la recette #{recipe.name} ?"}, remote: true %>
                 </div>
-              </div>
-            <% end %>
+              <% end %>
 
 
-            <div class="card-trip card-empty d-flex align-items-center justify-content-center text-secondary bg-light">
-             <%= link_to new_recipe_path do %>
-              <div class="card-trip-infos">
-                <center>
-                  <h1 class="text-secondary"><i class="fas fa-plus-circle"></i></h1>
-                  <h2 class="text-secondary">Ajouter une recette</h2>
-                </center>
-              </div>
+              <div class="card-trip card-empty d-flex align-items-center justify-content-center text-secondary bg-light">
+               <%= link_to new_recipe_path do %>
+                <div class="card-trip-infos">
+                  <center>
+                    <h1 class="text-secondary"><i class="fas fa-plus-circle"></i></h1>
+                    <h2 class="text-secondary">Ajouter une recette</h2>
+                  </center>
+                </div>
 
-              </div>
-            <% end %>
+                </div>
+              <% end %>
+            </div>
+            <br>
           </div>
-          <br>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
 <%# end %>
