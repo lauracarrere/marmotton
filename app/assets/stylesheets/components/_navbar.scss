@@ -1,3 +1,44 @@
+.navbar-marmotton-index {
+  justify-content: space-between;
+  transition: 0.5s background-color ease;
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+  a {
+    text-decoration: none;
+  }
+}
+
+.navbar-marmotton-index-transparent-1 {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.navbar-marmotton-index-transparent-2 {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.navbar-marmotton-index .navbar-collapse {
+  flex-grow: 0;
+}
+
+// .navbar-marmotton .navbar-brand img {
+//   width: 40px;
+// }
+
+.navbar-marmotton-index h2 {
+  font-family: 'Pacifico', cursive;
+  color: $deep-brown;
+  opacity: 0.8;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: $deep-brown;
+  opacity: 0.8;
+}
+
+
+
+
 .navbar-marmotton {
   justify-content: space-between;
   transition: 0.5s background-color ease;
@@ -21,9 +62,9 @@
   flex-grow: 0;
 }
 
-.navbar-marmotton .navbar-brand img {
-  width: 40px;
-}
+// .navbar-marmotton .navbar-brand img {
+//   width: 40px;
+// }
 
 .navbar-marmotton h2 {
   font-family: 'Pacifico', cursive;

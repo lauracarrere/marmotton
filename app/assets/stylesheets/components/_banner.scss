@@ -1,11 +1,10 @@
 
-
 .banner {
   background-size: cover;
   background-position: center;
-  padding-bottom: 10px;
+  padding-bottom: 100px;
   background-image: linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), asset-url('banner.jpg');
-  height: calc(10vh);
+  height: calc(100vh - 600px);
 }
 
 .banner h1 {
