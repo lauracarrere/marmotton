@@ -21,8 +21,6 @@
           <strong><%= @recipe.user.first_name %></strong>
         <%end%>
       </p>
-
-
       <p>
         Temps total : <%= @recipe.time %> minutes - Difficulté : <%= @recipe.difficulty if @recipe.difficulty.present? %>/5
       </p>
@@ -45,9 +43,9 @@
             <div class="container text-justify pl-3">
               <h5 class="ingredients-card-title pt-1">Description
                 <span>
-                  <% if @recipe.user == current_user && @recipe.description.nil? %>
-                    <button type="button" class="btn btn-light card-description" data-toggle="modal" data-target="#descriptionModal">
-                      <i class="fas fa-pen edit-icon ml-2"></i>
+                  <% if @recipe.user == current_user %>
+                    <button type="button" class="edit-description" data-toggle="modal" data-target="#descriptionModal">
+                      <i class="fas fa-pen edit-icon" id="edit-description-icon"></i>
                     </button>
                   <% end %>
                 </span>

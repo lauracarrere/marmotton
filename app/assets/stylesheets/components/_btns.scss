@@ -22,4 +22,17 @@
   height: 600px;
 }
 
+.edit-description {
+  text-align: center;
+  border-color: transparent;
+}
 
+#edit-description-icon {
+  font-size: 70%;
+  margin: 0;
+  padding: 0px 0px 3px 3px;
+  text-align: center;
+  color: $blue;
+  background-color: white;
+  border-color: transparent;
+}
