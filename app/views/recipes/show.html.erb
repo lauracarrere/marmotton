@@ -44,7 +44,7 @@
               <h5 class="ingredients-card-title pt-1">Description
                 <span>
                   <% if @recipe.user == current_user %>
-                    <button type="button" class="edit-description" data-toggle="modal" data-target="#descriptionModal">
+                    <button type="button" class="btn btn-link edit-description" data-toggle="modal" data-target="#descriptionModal">
                       <i class="fas fa-pen edit-icon" id="edit-description-icon"></i>
                     </button>
                   <% end %>
