@@ -20,13 +20,16 @@
         <% else %>
           <strong><%= @recipe.user.first_name %></strong>
         <%end%>
-      </p>
-      <p>
-        Temps total : <%= @recipe.time %> minutes - Difficulté : <%= @recipe.difficulty if @recipe.difficulty.present? %>/5
-      </p>
+
+      <span>
+        Temps total : <%= @recipe.time %> minutes - Difficulté :
+        <%= @recipe.difficulty if @recipe.difficulty.present? %>/5 -
+        <strong><a href="#comments" class="comment-link comment-button"><i class="far fa-comments ml-2"></i><%= @recipe.comments.size %></a></strong>
+      </span>
   </div>
 
   <div class="container">
+
     <div class="row">
       <div class="col-8">
         <div class="row">
@@ -51,6 +54,33 @@
                 </span>
               </h5>
               <p class="pt-1"><%= @recipe.description %></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ajout de commentaires -->
+        <div class="row">
+          <div class="container mt-5">
+            <h5 class="ingredients-card-title">
+              <%= pluralize @recipe.comments.size, "commentaire" %>
+            </h5>
+            <div id="comments">
+              <% unless @recipe.comments.blank? %>
+                <% @recipe.comments.each do |comment| %>
+                  <p id="comment-<%= comment.id %>"><%= comment.content %></p>
+                  <span class="quantity-delete-edit">
+                    <% if comment.recipe.user == current_user %>
+                      <%= link_to comment_path(comment), method: :delete, data: {confirm: "Souhaitez-vous vraiment supprimer votre commentaire sur #{@recipe.name} ?"}, remote: true do %>
+                        <i class="far fa-trash-alt"></i>
+                      <% end %>
+                    <% end %>
+                  </span>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div id= "new-comment" >
+              <%= render 'comments/form', recipe: @recipe, comment: @comment %>
             </div>
           </div>
         </div>

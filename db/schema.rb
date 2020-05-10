@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_15_112633) do
+ActiveRecord::Schema.define(version: 2020_05_09_142216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 2020_02_15_112633) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.bigint "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_comments_on_recipe_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
@@ -79,6 +87,7 @@ ActiveRecord::Schema.define(version: 2020_02_15_112633) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "recipes"
   add_foreign_key "quantities", "ingredients"
   add_foreign_key "quantities", "recipes"
   add_foreign_key "recipes", "users"

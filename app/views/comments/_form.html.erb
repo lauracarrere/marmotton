@@ -1,0 +1,4 @@
+<%= simple_form_for([ recipe, comment ], remote: true) do |f| %>
+  <%= f.input :content, label: "Votre commentaire :", as: :text %>
+  <%= f.submit "Postez votre commentaire", class: 'btn btn-primary mb-2' %>
+<% end %>
