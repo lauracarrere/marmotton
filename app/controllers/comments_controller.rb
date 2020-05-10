@@ -18,7 +18,7 @@ class CommentsController < ApplicationController
     puts "contenu du commentaire:#{@comment.content}"
     @comment.destroy
     puts "commentaire détruit - nom de la recette: #{@recipe.name}"
-    render 'recipes/show'
+    redirect_to recipe_path(@recipe)
   end
 
   private

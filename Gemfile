@@ -19,6 +19,7 @@ gem 'webpacker'
 # ajouté par moi:
 gem 'cloudinary', '~> 1.12.0'
 gem 'pg_search', '~> 2.3.0'
+gem 'turbolinks', '~> 5.2.0'
 gem 'turbolinks_render'
 
 group :development do
